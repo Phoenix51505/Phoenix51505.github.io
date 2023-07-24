@@ -1,0 +1,78 @@
+let civilians = 10000;
+let reducedDelirium = false;
+let werewolfRage = 5;
+// the above will all eventually be inputed by the user
+const civWill = [];
+let x = 0;
+let y = 0;
+const reactions = [" will go Catatonic, and feint or collapse in fear.", " will Panic, and try and put as much distance between them and the Fera.", " will experience Disbelief, and will try and hide from the 'hallucination.'", " will go Beserk, and try and attack the Fera mindlessly.", " will experience Terror, and will want to try and escape the Fera while retaining rational thought.", " will try and be Concilliatory with the Fera, attempting to plead and bargain for their safety.", " will experience Controlled Fear, they will be afraid but entirely in control of their actions.", " will experience Curiosity, they are afraid but will attempt to investigate the event afterwards.", " will have Bloodlust, they are afraid and angry and will likely try and hunt the Fera down.",  " will have No Reaction to Delirium. They are in total control of their emotions and actions. Not even kinfolk are this stoic to Fera."]
+const memory = [" They will forget the event after Delirium passes.", " They will remember the event after Delirium passes, but will try and rationalize and explain it according to their world view.", " They will remember the event accurately."];
+function getRandomInt(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min) + min)
+};
+function quantifyWill(currentValue, index) {
+    if (civWill[index] <= 1000) {
+        civWill[index] = 1
+    } else if (civWill[index] <= (1000 + 2000)) {
+        civWill[index] = 2
+    } else if (civWill[index] <= (1000 + 2000 + 1800)) {
+        civWill[index] = 3
+    } else if (civWill[index] <= (1000 + 2000 + 1800 + 1500)) {
+        civWill[index] = 4
+    } else if (civWill[index] <= (1000 + 2000 + 1800 + 1500 + 1300)) {
+        civWill[index] = 5
+    } else if (civWill[index] <= (1000 + 2000 + 1800 + 1500 + 1300 + 1000)) {
+        civWill[index] = 6
+    } else if (civWill[index] <= (1000 + 2000 + 1800 + 1500 + 1300 + 1000 + 700)) {
+        civWill[index] = 7
+    } else if (civWill[index] <= (1000 + 2000 + 1800 + 1500 + 1300 + 1000 + 700 + 500)) {
+        civWill[index] = 8
+    } else if (civWill[index] <= (1000 + 2000 + 1800 + 1500 + 1300 + 1000 + 700 + 500 + 150)) {
+        civWill[index] = 9
+    } else if (civWill[index] <= (1000 + 2000 + 1800 + 1500 + 1300 + 1000 + 700 + 500 + 150 + 50)) {
+        civWill[index] = 10
+    } // It was late and I was having difficulties doing math
+};
+for (let i = 0; i < civilians; i++ ) {
+    civWill[i] = getRandomInt(0, 10000)
+};
+civWill.forEach(quantifyWill);
+let counts = Array(10).fill(0);
+for (let i = 0; i < civWill.length; i++) {
+    counts[civWill[i] - 1]++;
+ };
+let affectedByRage = 0;
+for (let i = 0; i < werewolfRage - 1; i++) {
+    affectedByRage += counts[i]
+};
+console.log("Out of the group of " + civilians + " civilians, " + affectedByRage + " are effected by the Fera's rage");
+console.log("If delirium is caused:");
+if (reducedDelirium == true) {
+    for (let i = 0; i < 8; i++) {
+        if (i < 4) {
+         y = 0
+        } else if (i < 6) {
+         y = 1
+        } else {
+        y = 2
+        }
+        if (i == 7) {
+        console.log(counts[7] + counts[8] + counts[9] + reactions[9] + memory[y])
+        } else {
+        console.log(counts[i] + reactions[i] + memory[y])
+        }
+    }
+} else {
+    for (let i = 0; i < 10; i++) {
+        if (i < 6) {
+         y = 0
+        } else if ( i < 8) {
+         y = 1
+        } else {
+        y = 2
+        }
+    console.log(counts[i] + reactions[i] + memory[y])
+    }
+}
