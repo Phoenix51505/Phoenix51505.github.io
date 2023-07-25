@@ -65,7 +65,7 @@ if (reducedDelirium == "Yes") {
         if (i == 7 && counts[7] + counts[8] + counts[9] != 0) {
             document.getElementById("outputs").innerHTML += ("<p>" + (counts[7] + counts[8] + counts[9]) + reactions[9] + memory[y] + "</p>")
         } else if (counts[i] != 0) {
-            document.getElementById("outputs").innerHTML += ("<p>" + (counts[i] + reactions[i] + memory[y]) + "</p>")
+            document.getElementById("outputs").innerHTML += ("<p>" + (counts[i] + reactions[i+2] + memory[y]) + "</p>")
         }
     }
 } else {
