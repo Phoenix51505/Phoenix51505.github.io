@@ -1,6 +1,7 @@
-let civilians = 10000;
-let reducedDelirium = false;
-let werewolfRage = 5;
+function displayOutput() {
+var civilians = document.getElementById("civilians").value;
+var reducedDelirium = document.getElementById("reducedDelirium").value;
+var werewolfRage = document.getElementById("werewolfRage").value;
 // the above will all eventually be inputed by the user
 const civWill = [];
 let x = 0;
@@ -47,32 +48,38 @@ let affectedByRage = 0;
 for (let i = 0; i < werewolfRage - 1; i++) {
     affectedByRage += counts[i]
 };
-console.log("Out of the group of " + civilians + " civilians, " + affectedByRage + " are effected by the Fera's rage");
-console.log("If delirium is caused:");
-if (reducedDelirium == true) {
+outputRage.innerHTML = ("Out of the group of " + civilians + " civilians, " + affectedByRage + " are effected by the Fera's rage");
+outputStart.innerHTML = ("If delirium is caused:");
+while (outputs.lastChild != " " && outputs.lastChild != null) {
+    document.getElementById("outputs").removeChild(outputs.lastChild)
+}
+if (reducedDelirium == "Yes") {
     for (let i = 0; i < 8; i++) {
         if (i < 4) {
-         y = 0
+            y = 0
         } else if (i < 6) {
-         y = 1
+            y = 1
         } else {
-        y = 2
+            y = 2
         }
-        if (i == 7) {
-        console.log(counts[7] + counts[8] + counts[9] + reactions[9] + memory[y])
-        } else {
-        console.log(counts[i] + reactions[i] + memory[y])
+        if (i == 7 && counts[7] + counts[8] + counts[9] != 0) {
+            document.getElementById("outputs").innerHTML += ("<p>" + (counts[7] + counts[8] + counts[9]) + reactions[9] + memory[y] + "</p>")
+        } else if (counts[i] != 0) {
+            document.getElementById("outputs").innerHTML += ("<p>" + (counts[i] + reactions[i] + memory[y]) + "</p>")
         }
     }
 } else {
     for (let i = 0; i < 10; i++) {
         if (i < 6) {
-         y = 0
+            y = 0
         } else if ( i < 8) {
-         y = 1
+            y = 1
         } else {
-        y = 2
+            y = 2
         }
-    console.log(counts[i] + reactions[i] + memory[y])
+        if (counts[i] != 0) {
+            document.getElementById("outputs").innerHTML += ("<p>" + (counts[i] + reactions[i] + memory[y]) + "</p>")
+        }
     }
+}
 }
